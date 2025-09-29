@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Burada öz custom stilini yaza bilərsən */
+
+/* Nümunə: body üçün font və background */
+body {
+  @apply bg-gray-50 text-gray-800 font-sans;
+}
+
+/* Custom button nümunəsi */
+.btn-primary {
+  @apply px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition;
+}
+/* Custom card nümunəsi */
+.card {
+  @apply bg-white shadow-md rounded-lg p-6;
+}

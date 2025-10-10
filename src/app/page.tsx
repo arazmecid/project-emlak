@@ -1,76 +1,63 @@
-import React, { useMemo, useState } from "react";
+"use client";
 
-  function downloadCSV(items) {
-    const header = ["id,title,city,price,type,rooms,area,description"];
-    const rows = items.map((p) =>
-      [
-        p.id,
-        p.title,
-        p.city,
-        p.price,
-        p.type,
-        p.rooms,
-        p.area,
-        '"' + (p.description || "") + '"',
-      ].join(",")
-    );
-    const csv = header.concat(rows).join("\n");
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "properties.csv";
-    link.click();
-  }
+import Image from "next/image";
+import React, { useState } from "react";
 
-  const filtered = useMemo(() => {
-    let res = properties.filter((p) => {
-      if (
-        query &&
-        !`${p.title} ${p.description} ${p.city}`
-          .toLowerCase()
-          .includes(query.toLowerCase())
-      )
-        return false;
-      if (city && p.city !== city) return false;
-      if (typeFilter && p.type !== typeFilter) return false;
-      if (minPrice && p.price < Number(minPrice)) return false;
-      if (maxPrice && p.price > Number(maxPrice)) return false;
-      if (rooms && p.rooms !== Number(rooms)) return false;
-      return true;
-    });
-    if (sortBy === "price_asc") res.sort((a, b) => a.price - b.price);
-    if (sortBy === "price_desc") res.sort((a, b) => b.price - a.price);
-    return res;
-  }, [properties, query, city, typeFilter, minPrice, maxPrice, rooms, sortBy]);
+export default function Home() {
+  const [showAdmin, setShowAdmin] = useState(false);
+
+  // function downloadCSV(items) {
+  //   const header = ["id,title,city,price,type,rooms,area,description"];
+  //   const rows = items.map((p) =>
+  //     [
+  //       p.id,
+  //       p.title,
+  //       p.city,
+  //       p.price,
+  //       p.type,
+  //       p.rooms,
+  //       p.area,
+  //       '"' + (p.description || "") + '"',
+  //     ].join(",")
+  //   );
+  //   const csv = header.concat(rows).join("\n");
+  //   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  //   const link = document.createElement("a");
+  //   link.href = URL.createObjectURL(blob);
+  //   link.download = "properties.csv";
+  //   link.click();
+  // }
+
+  // const filtered = useMemo(() => {
+  //   let res = properties.filter((p) => {
+  //     if (
+  //       query &&
+  //       !`${p.title} ${p.description} ${p.city}`
+  //         .toLowerCase()
+  //         .includes(query.toLowerCase())
+  //     )
+  //       return false;
+  //     if (city && p.city !== city) return false;
+  //     if (typeFilter && p.type !== typeFilter) return false;
+  //     if (minPrice && p.price < Number(minPrice)) return false;
+  //     if (maxPrice && p.price > Number(maxPrice)) return false;
+  //     if (rooms && p.rooms !== Number(rooms)) return false;
+  //     return true;
+  //   });
+  //   if (sortBy === "price_asc") res.sort((a, b) => a.price - b.price);
+  //   if (sortBy === "price_desc") res.sort((a, b) => b.price - a.price);
+  //   return res;
+  // }, [properties, query, city, typeFilter, minPrice, maxPrice, rooms, sortBy]);
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-extrabold">Emlak Bazaar</h1>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setShowAdmin((s) => !s)}
-              className="px-3 py-1 border rounded-md text-sm"
-            >
-              {showAdmin ? "Bağla" : "Admin: Yeni Elan"}
-            </button>
-            <button
-              onClick={() => downloadCSV(filtered)}
-              className="px-3 py-1 border rounded-md text-sm"
-            >
-              CSV Yüklə
-            </button>
-          </div>
-        </div>
-      </header>
       <main className="max-w-7xl mx-auto p-4">
         {/* Admin add form */}
         {showAdmin && (
           <section className="bg-white p-4 rounded-md shadow mb-4">
             <h2 className="font-bold mb-2">Yeni elan əlavə et (Admin mock)</h2>
             <form
-              onSubmit={handleAddProperty}
+              // onSubmit={handleAddProperty}
               className="grid grid-cols-1 md:grid-cols-3 gap-2"
             >
               <input
@@ -137,12 +124,12 @@ import React, { useMemo, useState } from "react";
           <div className="lg:col-span-2">
             {/* Listings */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {filtered.map((p) => (
+              {[].map((p) => (
                 <article
                   key={p.id}
                   className="bg-white rounded shadow overflow-hidden"
                 >
-                  <img
+                  <Image
                     src={p.image}
                     alt={p.title}
                     className="w-full h-44 object-cover"
@@ -182,7 +169,7 @@ import React, { useMemo, useState } from "react";
                 </article>
               ))}
 
-              {filtered.length === 0 && (
+              {[].length === 0 && (
                 <div className="col-span-full bg-white p-4 rounded shadow text-center">
                   Heç bir nəticə tapılmadı.
                 </div>
@@ -203,13 +190,13 @@ import React, { useMemo, useState } from "react";
             <div className="bg-white p-4 rounded shadow">
               <h4 className="font-bold mb-2">Statistika</h4>
               <div>
-                Ümumi elanlar: <strong>{properties.length}</strong>
+                Ümumi elanlar: <strong>{[].length}</strong>
               </div>
               <div>
-                Filtr nəticəsi: <strong>{filtered.length}</strong>
+                Filtr nəticəsi: <strong>{[].length}</strong>
               </div>
               <div>
-                Şəhərlər: <strong>{cities.join(", ")}</strong>
+                Şəhərlər: <strong>{[].join(", ")}</strong>
               </div>
             </div>
             {/* Contact form */}
@@ -219,7 +206,6 @@ import React, { useMemo, useState } from "react";
                 onSubmit={(e) => {
                   e.preventDefault();
                   alert("Mesaj göndərildi (demo).");
-                  e.target.reset();
                 }}
               >
                 <input
@@ -249,7 +235,7 @@ import React, { useMemo, useState } from "react";
         </section>
 
         {/* Modal */}
-        {selected && (
+        {/* {  && (
           <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
             <div className="bg-white rounded-lg max-w-3xl w-full overflow-auto">
               <div className="flex justify-between items-start p-3 border-b">
@@ -262,7 +248,7 @@ import React, { useMemo, useState } from "react";
                 </button>
               </div>
               <div className="p-3 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <img
+                <Image
                   src={selected.image}
                   alt={selected.title}
                   className="w-full h-64 object-cover rounded"
@@ -283,7 +269,6 @@ import React, { useMemo, useState } from "react";
                       onSubmit={(e) => {
                         e.preventDefault();
                         alert("Mesaj göndərildi sahibinə (demo)");
-                        e.target.reset();
                       }}
                     >
                       <input
@@ -313,11 +298,24 @@ import React, { useMemo, useState } from "react";
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </main>
-
-      <footer className="text-center text-sm text-gray-500 py-4">
-        © {new Date().getFullYear()} Emlak Bazaar — Demo
-      </footer>
     </div>
   );
+}
+
+//#region A
+// import React from "react";
+
+// const Home = () => {
+//   return (
+//     <div className="bg-red-400 container">
+//       <h1>home</h1>
+
+//       <button className="btn">click</button>
+//     </div>
+//   );
+// };
+
+// export default Home;
+//#endregion

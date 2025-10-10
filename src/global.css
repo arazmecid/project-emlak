@@ -9,13 +9,12 @@
   --breakpoint-2xl: 1440px;
   --breakpoint-3xl: 1800px;
 
-  --brand-500: #1e40af;
-  --brand-600: #1e3a8a;
-  --accent-500: #16a34a;
-  --muted: #6b7280;
-  --surface: #ffffff;
-  --glass: rgba(255, 255, 255, 0.6);
-  --card-radius: 0.75rem;
+  --color-brand-500: #1e40af;
+  --color-brand-600: #1e3a8a;
+  --color-accent-500: #16a34a;
+  --color-muted: #6b7280;
+  --color-surface: #ffffff;
+  --color-glass: rgba(255, 255, 255, 0.6);
 }
 
 @utility container {
@@ -54,9 +53,9 @@
     line-height: 1.45;
   }
 
-  /* a {
+  a {
     @apply text-brand-600 hover:underline;
-  } */
+  }
 
   h1,
   h2,

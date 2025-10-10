@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import React, { useState } from "react";
 
@@ -167,7 +169,7 @@ export default function Home() {
                 </article>
               ))}
 
-              {filtered.length === 0 && (
+              {[].length === 0 && (
                 <div className="col-span-full bg-white p-4 rounded shadow text-center">
                   Heç bir nəticə tapılmadı.
                 </div>
@@ -188,13 +190,13 @@ export default function Home() {
             <div className="bg-white p-4 rounded shadow">
               <h4 className="font-bold mb-2">Statistika</h4>
               <div>
-                Ümumi elanlar: <strong>{properties.length}</strong>
+                Ümumi elanlar: <strong>{[].length}</strong>
               </div>
               <div>
-                Filtr nəticəsi: <strong>{filtered.length}</strong>
+                Filtr nəticəsi: <strong>{[].length}</strong>
               </div>
               <div>
-                Şəhərlər: <strong>{cities.join(", ")}</strong>
+                Şəhərlər: <strong>{[].join(", ")}</strong>
               </div>
             </div>
             {/* Contact form */}
@@ -233,7 +235,7 @@ export default function Home() {
         </section>
 
         {/* Modal */}
-        {selected && (
+        {/* {  && (
           <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
             <div className="bg-white rounded-lg max-w-3xl w-full overflow-auto">
               <div className="flex justify-between items-start p-3 border-b">
@@ -296,7 +298,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </main>
     </div>
   );

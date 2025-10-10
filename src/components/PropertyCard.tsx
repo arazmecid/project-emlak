@@ -1,14 +1,14 @@
-import Image from "next/image"
+import Image from "next/image";
 
 type Property = {
-  id: number
-  title: string
-  description: string
-  price: number
-  address: string
-  city: string
-  images: string[]
-}
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  address: string;
+  city: string;
+  images: string[];
+};
 
 export default function PropertyCard({ property }: { property: Property }) {
   return (
@@ -26,5 +26,5 @@ export default function PropertyCard({ property }: { property: Property }) {
         <p className="mt-2 font-bold text-blue-600">{property.price} AZN</p>
       </div>
     </article>
-  )
+  );
 }
